@@ -1,0 +1,33 @@
+To solve the problem of determining whether Abhimanyu can successfully cross all 11 circles of the Chakravyuha, we need to check his journey through each circle and manage his power as described in the question. Here's an overview of the algorithm on how to approach it:
+
+ Algorithm Overview:
+
+1. Initialization:
+   - Start by initializing Abhimanyu's power to his initial power and create a set to track regenerated enemies.
+
+2. Determining Skipping Enemies:
+   - Sort the enemies in descending order based on their power.
+   - Select the strongest enemies to skip based on the number of available skips.
+
+3. Iterating Through Each Circle:
+   - For each enemy in the circles:
+     - If the enemy is among those to be skipped, continue to the next enemy.
+     
+4. Handling Recharges:
+   - Before engaging with critical battles (specifically the 3rd and 7th enemies) or if Abhimanyu's power is low, recharge if recharges are available.
+   - If Abhimanyu’s power is less than the enemy’s power after considering possible recharges, he loses the battle and the function returns false.
+
+5. Battle the Enemy:
+   - If Abhimanyu’s power is sufficient, subtract the enemy's power from Abhimanyu's power.
+
+6. Track Regenerating Enemies:
+   - If the current enemy is the 3rd or 7th, mark it as a regenerated enemy.
+
+7. Handling Regenerated Enemy Attacks:
+   - For each circle, check if the enemy from the previous circle has regenerated and attacks from behind.
+   - Calculate the regenerated power (half of the enemy's initial power) and subtract it from Abhimanyu's power.
+   - If Abhimanyu’s power falls below the regenerated enemy’s power, he loses the battle.
+
+8. The Outcome:
+   - If Abhimanyu successfully crosses all circles without his power dropping to zero, the function returns true, indicating he has crossed the Chakravyuha.
+   - If at any point his power drops below zero, the function returns false.

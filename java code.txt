@@ -1,0 +1,78 @@
+ Java Implementation:
+
+import java.util.*;
+
+public class ChakravyuhaChallenge {
+    public static boolean canAbhimanyuCrossChakravyuha(int[] enemyPowers, int initialPower, int skips, int recharges) {
+        int abhimanyuPower = initialPower;
+        Set<Integer> regeneratedEnemies = new HashSet<>();
+
+        // Sort enemies by power and skip the strongest ones
+        Integer[] indices = new Integer[enemyPowers.length];
+        for (int i = 0; i < indices.length; i++) {
+            indices[i] = i;
+        }
+        Arrays.sort(indices, (a, b) -> Integer.compare(enemyPowers[b], enemyPowers[a]));
+        Set<Integer> skippedEnemies = new HashSet<>();
+        for (int i = 0; i < skips && i < indices.length; i++) {
+            skippedEnemies.add(indices[i]);
+        }
+
+        for (int i = 0; i < enemyPowers.length; i++) {
+            if (skippedEnemies.contains(i)) {
+                continue;
+            }
+
+            // Recharge before critical battles (3rd, 7th, or when power is low)
+            if ((i == 2 || i == 6 || abhimanyuPower < enemyPowers[i]) && recharges > 0) {
+                abhimanyuPower = initialPower;
+                recharges--;
+            }
+
+            if (abhimanyuPower < enemyPowers[i]) {
+                return false;
+            }
+
+            abhimanyuPower -= enemyPowers[i];
+
+            if (i == 2 || i == 6) {
+                regeneratedEnemies.add(i);
+            }
+
+            if (i > 0 && regeneratedEnemies.contains(i - 1)) {
+                int regeneratedPower = enemyPowers[i - 1] / 2;
+                if (abhimanyuPower < regeneratedPower) {
+                    return false;
+                }
+                abhimanyuPower -= regeneratedPower;
+            }
+        }
+
+        return true;
+    }
+
+    public static void runTestCase(int[] enemyPowers, int initialPower, int skips, int recharges) {
+        boolean result = canAbhimanyuCrossChakravyuha(enemyPowers, initialPower, skips, recharges);
+        System.out.println("Enemy powers: " + Arrays.toString(enemyPowers));
+        System.out.println("Initial power: " + initialPower + ", Skips: " + skips + ", Recharges: " + recharges);
+        System.out.println("Abhimanyu can cross: " + result + "\n");
+    }
+
+    public static void main(String[] args) {
+        // Test Case 1 (should return true)
+        int[] enemyPowers1 = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110};
+        int initialPower1 = 300;  // initial power
+        int skips1 = 3;           // number of skips
+        int recharges1 = 2;       // number of recharges
+
+        runTestCase(enemyPowers1, initialPower1, skips1, recharges1);
+
+        // Test Case 2 (should return false)
+        int[] enemyPowers2 = {15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115};
+        int initialPower2 = 150;
+        int skips2 = 1;
+        int recharges2 = 2;
+
+        runTestCase(enemyPowers2, initialPower2, skips2, recharges2);
+    }
+}
