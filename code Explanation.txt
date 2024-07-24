@@ -1,3 +1,9 @@
 Explanation:
 
-The `ChakravyuhaChallenge` class contains a method `canAbhimanyuCrossChakravyuha` that determines if Abhimanyu can cross a series of enemy-guarded circles. The method starts by initializing Abhimanyu's power and sets to track skipped and regenerated enemies. It then sorts enemies by power and skips the strongest ones if skips are available. In the main loop, for each enemy, it recharges if necessary and possible, skips the enemy if skips are available, or battles the enemy if Abhimanyu's power is sufficient. Special handling is included for regenerating enemies k3 and k7, which can attack again from behind in the next circle. The method returns `true` if Abhimanyu successfully crosses all circles without his power dropping to zero. The `runTestCase` method tests this logic with specific scenarios, and the `main` method executes these test cases, printing the results.
+The `ChakravyuhaChallenge` class contains a method `canAbhimanyuCrossChakravyuha` that determines if Abhimanyu can cross a series of enemy-guarded circles.
+The method starts by initializing Abhimanyu's power and sets to track skipped and regenerated enemies. 
+It then sorts enemies by power and skips the strongest ones if skips are available. 
+In the main loop, for each enemy, it recharges if necessary and possible, skips the enemy if skips are available, or battles the enemy if Abhimanyu's power is sufficient. 
+Special handling is included for regenerating enemies k3 and k7, which can attack again from behind in the next circle. 
+The method returns `true` if Abhimanyu successfully crosses all circles without his power dropping to zero. 
+The `runTestCase` method tests this logic with specific scenarios, and the `main` method executes these test cases, printing the results.
